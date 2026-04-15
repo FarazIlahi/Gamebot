@@ -1,8 +1,11 @@
+from urllib import response
+
 import discord
 from discord.ext import commands
 import responses
 from dotenv import load_dotenv
 import os
+from google import genai
 
 async def send_message(ctx, user_message):
 	try:
@@ -19,7 +22,15 @@ async def send_message(ctx, user_message):
 def run_discord_bot():
 	load_dotenv()
 	TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+	GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+	client = genai.Client()
+	response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="Reply in one sentence: say hello like a funny Discord bot."
+	)
 
+	print(response.text)
+	
 	deleted_messages = {}
 	cmd_prefix = '.'
 	intents = discord.Intents.default()

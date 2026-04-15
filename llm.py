@@ -9,3 +9,7 @@ def ask_gemini(prompt: str) -> str:
         contents=prompt
     )
     return response.text
+
+def generate_roast(member) -> str:
+    prompt = f"Generate a roast for {member.mention}. Keep it short and simple nothing crazy."
+    return ask_gemini(prompt)

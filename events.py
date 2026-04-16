@@ -1,3 +1,5 @@
+import discord
+
 import responses
 
 async def send_message(message, user_message):
@@ -40,6 +42,12 @@ def register_events(bot, deleted_messages):
     async def on_member_join(member):
         if member.guild.system_channel:
             await member.guild.system_channel.send("yo wsg new guy")
+
+        try:
+          await member.add_roles(discord.utils.get(member.guild.roles, name='base aura'))
+        except Exception as e:
+            print(e)
+
 
     @bot.event
     async def on_member_remove(member):

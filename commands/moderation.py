@@ -6,13 +6,13 @@ def register_moderation_commands(bot):
 		try:
 			if ctx.author.guild_permissions.manage_roles:
 				mute_role = discord.utils.get(ctx.guild.roles, name='Muted')
-				reg_role = discord.utils.get(ctx.guild.roles, name='reg')
+				base_role = discord.utils.get(ctx.guild.roles, name='base aura')
 
 				if not mute_role:
 					mute_role = await ctx.guild.create_role(name='Muted', reason='Creating mute role')
 
 				await member.add_roles(mute_role, reason='Muted by command')
-				await member.remove_roles(reg_role, reason='Muted by command')
+				await member.remove_roles(base_role, reason='Muted by command')
 
 				await ctx.send(f'{member.mention} has been muted.')
 			else:
@@ -27,11 +27,11 @@ def register_moderation_commands(bot):
 		try:
 			if ctx.author.guild_permissions.manage_roles:
 				mute_role = discord.utils.get(ctx.guild.roles, name='Muted')
-				reg_role = discord.utils.get(ctx.guild.roles, name='reg')
+				base_role = discord.utils.get(ctx.guild.roles, name='base aura')
 
 				if(mute_role):
 					await member.remove_roles(mute_role, reason='Unmuted by command')
-					await member.add_roles(reg_role, reason='Unmuted by command')
+					await member.add_roles(base_role, reason='Unmuted by command')
 
 					await ctx.send(f'{member.mention} has been unmuted')
 			else:

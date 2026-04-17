@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands
-
-from config import DISCORD_BOT_TOKEN, GEMINI_API_KEY, COMMAND_PREFIX
-from events import register_events
+from .config import DISCORD_BOT_TOKEN, GEMINI_API_KEY, COMMAND_PREFIX
+from .events import register_events
 from commands.utility import register_utility_commands	
 from commands.moderation import register_moderation_commands
 from commands.fun import register_fun_commands

@@ -1,18 +1,13 @@
-from db import get_connection
-
-def init_db():
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("""
+USERS_TABLE = """
     CREATE TABLE IF NOT EXISTS users (
         user_id TEXT PRIMARY KEY,
-        username TEXT NOT NULL
+        username TEXT NOT NULL,
+        display_name TEXT,
+        pfp_url TEXT
     )
-    """)
+    """
 
-
-    cursor.execute("""
+ROLES_TABLE = """
     CREATE TABLE IF NOT EXISTS roles (
         role_id TEXT PRIMARY KEY,
         guild_id TEXT,
@@ -21,9 +16,4 @@ def init_db():
         created_at TEXT DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (created_by_user_id) REFERENCES users(user_id)
     )
-    """)
-
-
-
-if __name__ == "__main__":
-    init_db()
+    """

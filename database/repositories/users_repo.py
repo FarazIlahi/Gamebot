@@ -25,8 +25,12 @@ def get_all_users():
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM users")
+    cursor.execute("""
+                   SELECT display_name 
+                   FROM users
+                   ORDER BY display_name ASC
+                   """)
     rows = cursor.fetchall()
-
+    names = [row[0] for row in rows]
     conn.close()
-    return rows
+    return "\n".join(names)

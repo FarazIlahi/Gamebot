@@ -1,5 +1,8 @@
 import discord
-custom_roles = {}
+from database.repositories.roles_repo import get_all_custom_color_roles, get_all_custom_color_roles_creator, get_role, upsert_role, get_all_roles,temp
+from database.repositories.users_repo import get_all_users
+
+
 def register_utility_commands(bot, deleted_messages):
     @bot.command()
     async def pfp(ctx, user: discord.Member = None):
@@ -34,8 +37,10 @@ def register_utility_commands(bot, deleted_messages):
         color = discord.Color(color_value)
 
 
-        if(ctx.author.id in custom_roles):
-            current_role = custom_roles[ctx.author.id]
+        if(str(ctx.author.id) in get_all_custom_color_roles_creator()):
+            print("User already has a custom color role. Updating existing role.")
+            current_role = ctx.guild.get_role(int(get_role(str(ctx.author.id))))
+            upsert_role(current_role, created_by_user_id=ctx.author.id, is_color_role=True)
             await current_role.edit(name=role_name, color=color, reason = "Updated color role")
             await ctx.send(f"Updated role **{role_name}** with color `#{hexcode.upper()}` for you.")
         else:
@@ -53,7 +58,7 @@ def register_utility_commands(bot, deleted_messages):
                 return
             try:
                 await ctx.guild.edit_role_positions(
-                    positions={role: target_role.position - 1},
+                    positions={role: target_role.position},
                     reason="Move custom color role under Color Roles"
                 )
             except discord.Forbidden:
@@ -62,6 +67,20 @@ def register_utility_commands(bot, deleted_messages):
             except discord.HTTPException as e:
                 await ctx.send(f"Couldn't move the role: {e}")
                 return
-            custom_roles[ctx.author.id] = role
+            upsert_role(role, created_by_user_id=ctx.author.id, is_color_role=True)
             await ctx.author.add_roles(role, reason = "Added color role to self")
             await ctx.send(f"Created role **{role_name}** with color `#{hexcode.upper()}` and assigned it to you.")
+
+
+    @bot.command()
+    async def people(ctx):
+        await ctx.send(get_all_users())
+
+    @bot.command()
+    async def colorroles(ctx):
+        await ctx.send(get_all_custom_color_roles_creator())
+
+    @bot.command()
+    async def allroles(ctx):
+        await ctx.send([ctx.guild.get_role(int(role_id)).name for role_id in get_all_roles()])
+

@@ -1,5 +1,6 @@
 import discord
 import bot.roasts as roasts
+from database.repositories.roles_repo import upsert_role
 
 
 def register_fun_commands(bot):
@@ -9,4 +10,5 @@ def register_fun_commands(bot):
         msg = await ctx.send("thinking...")
         roast_message = roasts.get_roast(user)
         await msg.edit(content=roast_message)
+
 

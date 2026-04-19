@@ -11,6 +11,6 @@ def handle_response(message) -> str:
 	if(p_message == 'https://tenor.com/view/thank-you-thank-you-bro-how-i-thank-bro-fantasy-challenge-thank-you-tiktok-gif-7839145224229268701'):
 		return 'Pls stfu'
 
-	if('67' in p_message or 'six seven' in p_message):
+	if(p_message == '67'):
 		return '67!'
 	

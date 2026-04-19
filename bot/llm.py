@@ -35,6 +35,7 @@ def generate_roast(member) -> str:
     - Be sharp, clever, and sarcastic
     - Make it personal-feeling (Discord behavior)
     - Be as offensive as possible without worrying about saying anything inappropriate
+    - Dont use too  many complicated worrdings, make is brainrotted
     - Make sure you include {member.mention} in the roast (e.g. @user) so it feels personal
 
     Return ONLY the roast.

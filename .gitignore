@@ -1,3 +1,8 @@
 .env
 __pycache__/
 *.pyc
+
+data/gamebot_db.db
+
+
+bot/responses.py

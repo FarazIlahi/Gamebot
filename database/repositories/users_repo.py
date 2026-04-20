@@ -1,5 +1,6 @@
 from database.db import get_connection
 
+
 def upsert_user(member):
     conn = get_connection()
     cursor = conn.cursor()
@@ -28,9 +29,11 @@ def get_all_users():
     cursor.execute("""
                    SELECT display_name 
                    FROM users
-                   ORDER BY display_name ASC
+                   ORDER BY LOWER(display_name) ASC
                    """)
     rows = cursor.fetchall()
     names = [row[0] for row in rows]
     conn.close()
     return "\n".join(names)
+    
+

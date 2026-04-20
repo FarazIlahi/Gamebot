@@ -1,4 +1,5 @@
 import discord
+from discord import user
 from database.repositories.roles_repo import get_all_custom_color_roles_creator, get_all_roles
 from database.repositories.users_repo import get_all_users
 
@@ -7,7 +8,9 @@ def register_utility_commands(bot, deleted_messages):
     @bot.command()
     async def pfp(ctx, user: discord.Member = None):
         user = user or ctx.author
-        await ctx.send(f"{user.mention}'s profile picture: {user.avatar.url}")
+        embed = discord.Embed()
+        embed.set_image(url=user.avatar.url)
+        await ctx.send(embed=embed)
 
     @bot.command()
     async def snipe(ctx):

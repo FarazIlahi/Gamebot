@@ -1,5 +1,7 @@
 import discord
 
+from database.repositories.users_repo import upsert_user
+
 def register_moderation_commands(bot):
 	@bot.command()
 	async def mute(ctx, member: discord.Member = None):
@@ -58,5 +60,20 @@ def register_moderation_commands(bot):
 		deleted = await ctx.channel.purge(limit = amount + 1)
 		await ctx.send(f"Deleted {len(deleted) - 1} chats.")
 			
+
+	@bot.command()
+	async def syncusers(ctx):
+		guild = ctx.guild
+
+		added = 0
+
+		for member in guild.members:
+			if member.bot:
+				continue
+
+			upsert_user(member)
+			added += 1
+
+		await ctx.send(f"Sync complete. Added {added} users.")
 
     

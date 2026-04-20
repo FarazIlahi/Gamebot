@@ -1,5 +1,6 @@
 import discord
-from database.repositories.users_repo import upsert_user, get_all_users
+from database.repositories.users_repo import upsert_user
+from database.repositories.guilds_repo import upsert_guild
 import bot.responses as responses
 
 async def send_message(message, user_message):
@@ -41,10 +42,6 @@ def register_events(bot, deleted_messages):
     @bot.event
     async def on_member_join(member):
         upsert_user(member)
-        print(f"Inserted/updated user: {member.name} ({member.id})")
-        print("Current users table:")
-        for row in get_all_users():
-            print(row)
         if member.guild.system_channel:
             await member.guild.system_channel.send("yo wsg new guy")  
             try:
@@ -59,3 +56,8 @@ def register_events(bot, deleted_messages):
             await member.guild.system_channel.send(
                 f"{member.display_name} is gone.\nman gtfo of here."
             )
+
+
+    @bot.event
+    async def on_guild_join(guild):
+        upsert_guild(guild)

@@ -31,9 +31,9 @@ def register_fun_commands(bot):
         color = discord.Color(color_value)
 
 
-        if(str(ctx.author.id) in get_all_custom_color_roles_creator()):
+        if(str(ctx.author.id) in get_all_custom_color_roles_creator(ctx.guild.id)):
             print("User already has a custom color role. Updating existing role.")
-            current_role = ctx.guild.get_role(int(get_role(str(ctx.author.id))))
+            current_role = ctx.guild.get_role(int(get_role(str(ctx.author.id), ctx.guild.id)))
             upsert_role(current_role, created_by_user_id=ctx.author.id, is_color_role=True)
             await current_role.edit(name=role_name, color=color, reason = "Updated color role")
             await ctx.send(f"Updated role **{role_name}** with color `#{hexcode.upper()}` for you.")

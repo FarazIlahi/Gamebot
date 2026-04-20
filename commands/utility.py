@@ -40,9 +40,9 @@ def register_utility_commands(bot, deleted_messages):
 
     @bot.command()
     async def colorroles(ctx):
-        await ctx.send(get_all_custom_color_roles_creator())
+        await ctx.send(get_all_custom_color_roles_creator(ctx.guild.id))
 
     @bot.command()
     async def allroles(ctx):
-        await ctx.send([ctx.guild.get_role(int(role_id)).name for role_id in get_all_roles()])
+        await ctx.send([ctx.guild.get_role(int(role_id)).name for role_id in get_all_roles(ctx.guild.id)])
 

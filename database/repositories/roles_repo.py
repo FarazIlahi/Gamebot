@@ -22,57 +22,58 @@ def upsert_role(role: discord.Role, created_by_user_id: int | None = None, is_co
     conn.commit()
     conn.close()
 
-def get_all_custom_color_roles():
+def get_all_custom_color_roles(guild_id: str):
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
                    SELECT role_id
                    FROM roles
-                   WHERE is_color_role = 1
-                   """)
+                   WHERE is_color_role = 1 AND guild_id = ?
+                   """, (guild_id,))
     rows = cursor.fetchall()
     roles = [row[0] for row in rows]
     conn.close()
     return (roles)  
 
-def get_all_custom_color_roles_creator():
+def get_all_custom_color_roles_creator(guild_id: str):
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
                    SELECT created_by_user_id
                    FROM roles
-                   WHERE is_color_role = 1
-                   """)
+                   WHERE is_color_role = 1 AND guild_id = ?
+                   """, (guild_id,))
     rows = cursor.fetchall()
     names = [row[0] for row in rows]
     conn.close()
     return (names)  
 
-def get_role(created_by_user_id: str):
+def get_role(created_by_user_id: str, guild_id: str):
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
                    SELECT role_id
                    FROM roles
-                   WHERE is_color_role = 1 AND created_by_user_id = ?
-                   """, (created_by_user_id,))
+                   WHERE is_color_role = 1 AND created_by_user_id = ? AND guild_id = ?
+                   """, (created_by_user_id, guild_id))
     row = cursor.fetchone()
     conn.close()
     if row:
         return row[0]  # single value
     return None
 
-def get_all_roles():
+def get_all_roles(guild_id: str):
     conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
                    SELECT role_id
                    FROM roles
-                   """)
+                   WHERE guild_id = ?
+                   """, (guild_id,))
     rows = cursor.fetchall()
     roles = [row[0] for row in rows]
     conn.close()

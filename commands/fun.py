@@ -1,4 +1,4 @@
-from random import random
+import random
 
 import discord
 from bot import bot
@@ -66,6 +66,10 @@ def register_fun_commands(bot):
             await ctx.send(f"Created role **{role_name}** with color `#{hexcode.upper()}` and assigned it to you.")
 
 
+    @bot.command()
+    async def rate(ctx, *, thing: str):
+        score = random.randint(1, 10)
+        await ctx.send(f"I rate {thing} {score}/10")
 
     @bot.command()
     async def ship(ctx, user1: discord.Member, user2: discord.Member):
@@ -76,5 +80,5 @@ def register_fun_commands(bot):
     @bot.command()
     async def iq(ctx, user: discord.Member = None):
         user = user or ctx.author
-        iq = random.randint(50, 160)
-        await ctx.send(f"{user.mention} has an IQ of {iq} ")
+        iq = random.randint(50, 200)
+        await ctx.send(f"{user.mention} has an IQ of {iq}.")

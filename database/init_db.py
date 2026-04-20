@@ -1,5 +1,5 @@
-from db import get_connection
-from schema import USERS_TABLE, ROLES_TABLE, GUILDS_TABLE
+from .db import get_connection
+from .schema import USERS_TABLE, ROLES_TABLE, GUILDS_TABLE
 
 def init_db():
     conn = get_connection()

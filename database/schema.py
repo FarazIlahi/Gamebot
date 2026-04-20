@@ -8,7 +8,7 @@ USERS_TABLE = """
     """
 
 ROLES_TABLE = """
-    CREATE TABLE roles (
+    CREATE TABLE IF NOT EXISTS roles (
         role_id TEXT PRIMARY KEY,
         guild_id TEXT NOT NULL,
         created_by_user_id TEXT,
@@ -20,7 +20,7 @@ ROLES_TABLE = """
     """
 
 GUILDS_TABLE = """
-    CREATE TABLE guilds (
+    CREATE TABLE IF NOT EXISTS guilds (
         guild_id TEXT PRIMARY KEY,
         guild_name TEXT NOT NULL,
         created_at TEXT DEFAULT CURRENT_TIMESTAMP

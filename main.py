@@ -1,6 +1,6 @@
-import bot.bot as bot
-from database import init_db
+from bot.bot import run_discord_bot
+from database.init_db import init_db
 
 if __name__ == '__main__':
 	init_db()
-	bot.run_discord_bot()
+	run_discord_bot()

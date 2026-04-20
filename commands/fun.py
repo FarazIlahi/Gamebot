@@ -1,7 +1,6 @@
 from random import random
 
 import discord
-import bot
 from bot import bot
 import bot.roasts as roasts
 from database.repositories.roles_repo import get_all_custom_color_roles_creator, get_role, upsert_role

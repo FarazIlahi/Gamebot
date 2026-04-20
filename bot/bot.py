@@ -19,7 +19,7 @@ def run_discord_bot():
 	intents.message_content = True  
 	intents.members = True
 	
-	bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents = intents)
+	bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents = intents, help_command=None)
 
 	register_events(bot, deleted_messages)
 	register_utility_commands(bot, deleted_messages)

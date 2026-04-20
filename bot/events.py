@@ -57,5 +57,5 @@ def register_events(bot, deleted_messages):
     async def on_member_remove(member):
         if member.guild.system_channel:
             await member.guild.system_channel.send(
-                f"man gtfo of here\nWe didnt want you here anyways {member.name}"
+                f"{member.display_name} is gone.\nman gtfo of here."
             )

@@ -6,8 +6,8 @@ def init_db():
     cursor = conn.cursor()
 
     cursor.execute(USERS_TABLE)
-    cursor.execute(ROLES_TABLE)
     cursor.execute(GUILDS_TABLE)
+    cursor.execute(ROLES_TABLE)
 
     conn.commit()
     conn.close()

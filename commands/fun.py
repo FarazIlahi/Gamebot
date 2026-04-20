@@ -1,4 +1,8 @@
+from random import random
+
 import discord
+import bot
+from bot import bot
 import bot.roasts as roasts
 from database.repositories.roles_repo import get_all_custom_color_roles_creator, get_role, upsert_role
 
@@ -61,3 +65,21 @@ def register_fun_commands(bot):
             upsert_role(role, created_by_user_id=ctx.author.id, is_color_role=True)
             await ctx.author.add_roles(role, reason = "Added color role to self")
             await ctx.send(f"Created role **{role_name}** with color `#{hexcode.upper()}` and assigned it to you.")
+
+
+    @bot.command()
+    async def rate(ctx, *, thing: str):
+        score = random.randint(1, 10)
+        await ctx.send(f"I rate {thing} {score}/10")
+
+    @bot.command()
+    async def ship(ctx, user1: discord.Member, user2: discord.Member):
+        percent = random.randint(0, 100)
+        await ctx.send(f"{user1.mention} ❤️ {user2.mention} = {percent}% compatibility")
+
+
+    @bot.command()
+    async def iq(ctx, user: discord.Member = None):
+        user = user or ctx.author
+        iq = random.randint(50, 160)
+        await ctx.send(f"{user.mention} has an IQ of {iq} 🧠")

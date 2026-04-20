@@ -23,7 +23,13 @@ def register_utility_commands(bot, deleted_messages):
 
     
 
-    
+    @bot.command()
+    async def help(ctx):
+        msg = "**Commands:**\n"
+        for command in bot.commands:
+            if not command.hidden:
+                msg += f".{command.name}\n"
+        await ctx.send(msg)
 
     @bot.command()
     async def people(ctx):

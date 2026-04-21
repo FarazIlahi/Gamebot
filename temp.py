@@ -1,14 +1,14 @@
-# from database.db import get_connection
+from database.db import get_connection
 
 
-# conn = get_connection()
-# cursor = conn.cursor()
+conn = get_connection()
+cursor = conn.cursor()
 
-# cursor.execute("""
-#                 SELECT * FROM users
-#                 """)
+cursor.execute("""
+                SELECT * FROM message_edits
+                """)
 
-# rows = cursor.fetchall()
-# roles = [row[0] for row in rows]
-# conn.close()
-# print(roles)
+rows = cursor.fetchall()
+roles = [row[0] for row in rows]
+conn.close()
+print(roles)

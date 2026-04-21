@@ -42,7 +42,7 @@ MESSAGES_TABLE = """
     """
 EDITED_MESSAGES_TABLE = """
     CREATE TABLE IF NOT EXISTS message_edits  (
-        edit_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        edit_id TEXT PRIMARY KEY,
         message_id TEXT NOT NULL,
         old_content TEXT,
         edited_at TEXT DEFAULT CURRENT_TIMESTAMP,

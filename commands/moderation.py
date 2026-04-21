@@ -1,5 +1,6 @@
 import discord
 
+from database.repositories.guilds_repo import upsert_guild
 from database.repositories.users_repo import upsert_user
 
 def register_moderation_commands(bot):
@@ -75,5 +76,9 @@ def register_moderation_commands(bot):
 			added += 1
 
 		await ctx.send(f"Sync complete. Added {added} users.")
+
+	@bot.command()
+	async def syncguild(ctx):
+		upsert_guild(ctx.guild)
 
     

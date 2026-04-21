@@ -16,6 +16,8 @@ def upsert_messages(message: discord.Message):
     is_bot = 1 if message.author.bot else 0
     is_edited = 1 if message.edited_at else 0
 
+
+
     cursor.execute("""
         INSERT INTO messages (message_id, user_id, guild_id, channel_id, content, created_at, is_bot, is_edited)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)

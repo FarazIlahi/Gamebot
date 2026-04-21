@@ -1,4 +1,6 @@
 import discord
+from database.repositories.edited_messages_repo import insert_edited_messages
+from database.repositories.messages_repo import upsert_messages
 from database.repositories.users_repo import upsert_user
 from database.repositories.guilds_repo import upsert_guild
 import bot.responses as responses
@@ -20,15 +22,33 @@ def register_events(bot, deleted_messages):
     async def on_message(message):
         if message.author == bot.user:
             return
-
+        
+        if not message.content and not message.attachments:
+            return
+    
         if message.content and message.content[0] == bot.command_prefix:
             await bot.process_commands(message)
             return
+
+        upsert_messages(message)
 
         user_message = str(message.content)
         response = responses.handle_response(user_message)
         if response:
             await message.channel.send(response)
+
+    @bot.event
+    async def on_message_edit(before, after):
+        if after.author.bot:
+            return
+
+        # skip if content didn’t actually change
+        if before.content == after.content:
+            return
+
+        insert_edited_messages(before, after)
+        upsert_messages(after)
+
 
 
     @bot.event

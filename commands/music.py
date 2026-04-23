@@ -1,9 +1,13 @@
 import asyncio
 from collections import deque
+import os
 
 import discord
 from discord.ext import commands
 import yt_dlp
+from dotenv import load_dotenv
+load_dotenv()
+cookie_file = os.getenv("YTDLP_COOKIE_FILE")
 
 FFMPEG_PATH = "C:\\Users\\faraz\\Documents\\Gamebot\\resources\\ffmpeg.exe"
 
@@ -14,6 +18,8 @@ YTDL_OPTIONS = {
     "default_search": "auto",
     "extract_flat": False,
 }
+if cookie_file:
+    YTDL_OPTIONS["cookiefile"] = cookie_file
 
 FFMPEG_OPTIONS = {
     "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",

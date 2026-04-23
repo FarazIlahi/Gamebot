@@ -2,3 +2,6 @@ discord.py
 python-dotenv
 google-genai
 Pillow
+discord.py[voice]
+yt-dlp
+PyNaCl

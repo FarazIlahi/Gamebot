@@ -9,7 +9,14 @@ from dotenv import load_dotenv
 load_dotenv()
 cookie_file = os.getenv("YTDLP_COOKIE_FILE")
 
-FFMPEG_PATH = "C:\\Users\\faraz\\Documents\\Gamebot\\resources\\ffmpeg.exe"
+FFMPEG_PATH = ""
+
+if os.name == "nt":
+    # Windows (local)
+    FFMPEG_PATH = "C:\\Users\\faraz\\Documents\\Gamebot\\resources\\ffmpeg.exe"
+else:
+    # Linux (Railway)
+    FFMPEG_PATH = "ffmpeg"
 
 YTDL_OPTIONS = {
     "format": "bestaudio/best",

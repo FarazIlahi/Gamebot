@@ -5,7 +5,7 @@ conn = get_connection()
 cursor = conn.cursor()
 
 cursor.execute("""
-                SELECT * FROM message_edits
+                SELECT * FROM messages
                 """)
 
 rows = cursor.fetchall()

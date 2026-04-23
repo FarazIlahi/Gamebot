@@ -30,24 +30,24 @@ def register_events(bot, deleted_messages):
             await bot.process_commands(message)
             return
 
-        upsert_messages(message)
+        # upsert_messages(message)
 
         user_message = str(message.content)
         response = responses.handle_response(user_message)
         if response:
             await message.channel.send(response)
 
-    @bot.event
-    async def on_message_edit(before, after):
-        if after.author.bot:
-            return
+    # @bot.event
+    # async def on_message_edit(before, after):
+    #     if after.author.bot:
+    #         return
 
-        # skip if content didn’t actually change
-        if before.content == after.content:
-            return
+    #     # skip if content didn’t actually change
+    #     if before.content == after.content:
+    #         return
 
-        insert_edited_messages(before, after)
-        upsert_messages(after)
+    #     insert_edited_messages(before, after)
+    #     upsert_messages(after)
 
 
 

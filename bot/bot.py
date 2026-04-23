@@ -5,6 +5,7 @@ from .events import register_events
 from commands.utility import register_utility_commands	
 from commands.moderation import register_moderation_commands
 from commands.fun import register_fun_commands
+from commands.music import register_music_commands
 
 
 
@@ -25,5 +26,5 @@ def run_discord_bot():
 	register_utility_commands(bot, deleted_messages)
 	register_moderation_commands(bot)
 	register_fun_commands(bot)
-	
+	register_music_commands(bot)
 	bot.run(DISCORD_BOT_TOKEN)

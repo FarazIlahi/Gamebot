@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 import yt_dlp
 
-FFMPEG_PATH = "ffmpeg"   # or full path to ffmpeg.exe on Windows
+FFMPEG_PATH = "C:\\Users\\faraz\\Documents\\Gamebot\\resources\\ffmpeg.exe"
 
 YTDL_OPTIONS = {
     "format": "bestaudio/best",
@@ -63,7 +63,7 @@ class GuildMusicState:
         self.play_next_event.clear()
 
 
-def setup(bot: commands.Bot):
+def register_music_commands(bot: commands.Bot):
     music_states: dict[int, GuildMusicState] = {}
 
     def get_state(guild_id: int) -> GuildMusicState:
